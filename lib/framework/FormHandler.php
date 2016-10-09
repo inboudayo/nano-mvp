@@ -139,7 +139,7 @@ class FormHandler
 
     // validate user input
     // $str: string to be validated
-    // $type: alpha, alnum, numeric, email, url, ip, single_line
+    // $type: alpha, alnum, numeric, email, url, ip
     // $len: optional maximum length
     // $chars: optional string of any non alpha-numeric characters to allow
     public function validate($str, $type = null, $len = null, $chars = null) {
