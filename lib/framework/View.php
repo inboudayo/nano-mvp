@@ -14,13 +14,13 @@ class View
         if (!empty($this->data)) {
             //extract(array_map(array('self', 'sanitize'), $this->data));
             $this->data = array_map(['self', 'sanitize'], $this->data);
-            if (is_object($form)) {
-                if (!empty($form->data)) {
-                    $form->data = array_map(['self', 'sanitize'], $form->data);
-                }
-            } else {
-                unset($form);
+        }
+        if (is_object($form)) {
+            if (!empty($form->data)) {
+                $form->data = array_map(['self', 'sanitize'], $form->data);
             }
+        } else {
+            unset($form);
         }
 
         // if not defined, set title based on view
