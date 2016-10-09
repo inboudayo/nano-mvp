@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+
+# remove www from host
+RewriteCond %{HTTP_HOST} ^www\.(.+)$
+RewriteRule ^ http://%1%{REQUEST_URI} [L,R=301]
+
+# force HTTPS
+# RewriteCond %{HTTPS} !=on
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R]
+
+# base path, if not the root directory
+RewriteBase /
+
+# direct all requests to index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php
+</IfModule>

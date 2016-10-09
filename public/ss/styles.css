@@ -1,0 +1,28 @@
+/* template */
+body {
+  background-color: #f0f0e5;
+  color: #323434;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 15px;
+}
+#logo {
+  /* border: solid 1px #000; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 304px;
+  height: 450px;
+  margin-top: -225px; /* Half the height */
+  margin-left: -152px; /* Half the width */
+  text-align: center;
+}
+
+/* links */
+a:link, a:visited, a:active { 
+  color: #ff4e7a;
+  text-decoration: underline;
+}
+a:hover {
+  color: #ff4e7a;
+  text-decoration: none; 
+}
