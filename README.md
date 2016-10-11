@@ -4,7 +4,7 @@ Nano is an MVP-based framework, ideal for organizing projects with virtually no 
 
 ## Installation
 
-Nano requires PHP >= 5.4. After downloading, you'll find the following file structure.
+Nano has a minimum requirement of PHP >= 5.4, but PHP 7 is strongly recommended. After downloading, you'll find the following file structure.
 
 * **lib**
   * **framework**

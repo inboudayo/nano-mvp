@@ -44,9 +44,23 @@ class FormHandler
     }
 
     // generate a unique CSRF token
-    private function getToken()
+    private function getToken($length = 40)
     {
-        return hash('sha1', uniqid(mt_rand(), true));
+        $result = false;
+        if (function_exists('random_bytes')) {
+            $result = bin2hex(random_bytes($length)); // php 7
+        } elseif (function_exists('mcrypt_create_iv')) {
+            $result = bin2hex(mcrypt_create_iv($length, MCRYPT_DEV_URANDOM));
+        } elseif (function_exists('openssl_random_pseudo_bytes')) {
+            $result = bin2hex(openssl_random_pseudo_bytes($length));
+        } else {
+            // fallback, more predictable
+            for ($i = 0; $i < $length; $i++) {
+                $result .= chr(mt_rand(0, 255));
+            }
+        }
+
+        return $result;
     }
 
     // check for valid form submission: POST request & matching CSRF token
