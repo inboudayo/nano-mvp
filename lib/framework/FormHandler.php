@@ -52,7 +52,7 @@ class FormHandler
         } elseif (function_exists('mcrypt_create_iv')) {
             $result = bin2hex(mcrypt_create_iv($length, MCRYPT_DEV_URANDOM));
         } elseif (function_exists('openssl_random_pseudo_bytes')) {
-            $result = bin2hex(openssl_random_pseudo_bytes(ceil($length / 2)));
+            $result = bin2hex(openssl_random_pseudo_bytes(round($length / 2)));
         } else {
             // fallback, more predictable
             for ($i = 0; $i < $length; $i++) {
