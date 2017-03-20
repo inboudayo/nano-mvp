@@ -40,7 +40,7 @@ class Router
         }
 
         if (isset($method)) {
-            // make sure method exists, and is not inherited
+            // make sure a valid method exists, and is not inherited
             if (method_exists($this->controller, $method) && !method_exists(get_parent_class($this->controller), $method)) {
                 $this->method = $method;
             } else {
@@ -50,8 +50,9 @@ class Router
             unset($method);
         }
 
-        if (isset($params)) {
-            // make sure we have the appropriate number of arguments, if arguments exist
+        // we should always have a valid controller and method at this point, even if the defaults
+        // make sure we have the appropriate number of parameters, if arguments exist
+        if (method_exists($this->controller, $this->method)) {
             $ref_class = new \ReflectionClass($this->controller);
             $ref_method = $ref_class->getMethod($this->method);
             $args = explode('/', $params);
@@ -64,8 +65,11 @@ class Router
                 // invalid request
                 self::notFound();
             }
-            unset($params);
+        } else {
+            // invalid request
+            self::notFound();
         }
+        unset($params);
 
         // get required dependencies and peform any last minute checks before routing
         $this->model = new ModelFactory(DB_HOST, DB_NAME, DB_USER, DB_PASS);
