@@ -55,15 +55,16 @@ class Router
         if (method_exists($this->controller, $this->method)) {
             $ref_class = new \ReflectionClass($this->controller);
             $ref_method = $ref_class->getMethod($this->method);
-            $args = explode('/', $params);
-            $total_args = count($args);
-            if ($ref_method->getNumberOfParameters() > 0 &&
-                $total_args >= $ref_method->getNumberOfRequiredParameters() &&
-                $total_args <= $ref_method->getNumberOfParameters()) {
-                $this->params = $args;
-            } else {
-                // invalid request
-                self::notFound();
+            if ($ref_method->getNumberOfParameters() > 0) {
+                $args = explode('/', $params);
+                $total_args = count($args);
+                if ($total_args >= $ref_method->getNumberOfRequiredParameters() &&
+                    $total_args <= $ref_method->getNumberOfParameters()) {
+                    $this->params = $args;
+                } else {
+                    // invalid request
+                    self::notFound();
+                }
             }
         } else {
             // invalid request
