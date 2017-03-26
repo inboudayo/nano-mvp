@@ -214,6 +214,6 @@ The method `$form->status()` outputs any success or error messages and cleans up
 
 You should now have a fully-functional contact form and (hopefully) a more in-depth understanding of Nano.
 
-##License
+## License
 
 The Nano MVP framework is licensed under the [MIT license](http://opensource.org/licenses/MIT).
