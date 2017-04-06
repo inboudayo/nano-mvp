@@ -44,7 +44,7 @@ class FormHandler
     }
 
     // generate a unique CSRF token
-    private function getToken($length = 40)
+    public function getToken($length = 40)
     {
         $result = false;
         if (function_exists('random_bytes')) {
