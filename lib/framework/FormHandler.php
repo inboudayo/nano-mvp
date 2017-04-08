@@ -68,17 +68,20 @@ class FormHandler
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (list($controller, $method) = self::origin(2)) {
-                if (isset($token, $_SESSION[$controller][$method]['csrf']) && $token == $_SESSION[$controller][$method]['csrf']) {
-                    // this is a new submission, so wipe out any previous errors
-                    unset($_SESSION[$controller][$method]['failed']);
+                // this is a new submission, so wipe out any previous errors
+                unset($_SESSION[$controller][$method]['failed']);
 
-                    // preserve new data in case of failure
-                    $_SESSION[$controller][$method]['preserved'] = $_POST;
+                // preserve new data in case of failure
+                $_SESSION[$controller][$method]['preserved'] = $_POST;
 
-                    // reset the CSRF token
-                    $_SESSION[$controller][$method]['csrf'] = self::getToken();
+                // reset the CSRF token
+                $_SESSION[$controller][$method]['csrf'] = self::getToken();
 
+                // check for token match
+                if ($token == $this->token) {
                     return true;
+                } else {
+                    self::error('Invalid token. It is possible the session timed out due to inactivity, please try submitting again.');
                 }
             }
         }
