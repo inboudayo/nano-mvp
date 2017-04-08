@@ -136,18 +136,8 @@ class FormHandler
                         echo '<li>' . $desc . '</li>';
                     }
                 } else {
-                    // this is probably a more serious error
-                    // TO-DO: add code to log for administrator review
+                    // this might hint at a more serious error, as it's not tied to a specific input
                     echo '<li>' . $_SESSION[$controller][$method]['failed'] . '</li>';
-
-                    // clean up data we no longer need for this particular form
-                    $this->data = [];
-                    $temp = $_SESSION[$controller][$method]['csrf'];
-                    unset($_SESSION[$controller][$method]);
-                    if (empty($_SESSION[$controller])) {
-                        unset($_SESSION[$controller]);
-                    }
-                    $_SESSION[$controller][$method]['csrf'] = $temp;
                 }
                 echo '</ul>';
             }
