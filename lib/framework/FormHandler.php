@@ -81,7 +81,7 @@ class FormHandler
                 if ($token == $this->token) {
                     return true;
                 } else {
-                    self::error('Invalid token. It is possible the session timed out due to inactivity, please try submitting again.');
+                    $_SESSION[$controller][$method]['failed'] = 'Invalid token. It is possible the session timed out due to inactivity, please try submitting again.';
                 }
             }
         }
