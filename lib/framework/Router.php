@@ -56,7 +56,7 @@ class Router
             $ref_class = new \ReflectionClass($this->controller);
             $ref_method = $ref_class->getMethod($this->method);
             if ($ref_method->getNumberOfParameters() > 0) {
-                $args = explode('/', $params);
+                $args = array_filter(explode('/', $params));
                 $total_args = count($args);
                 if ($total_args >= $ref_method->getNumberOfRequiredParameters() &&
                     $total_args <= $ref_method->getNumberOfParameters()) {

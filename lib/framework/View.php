@@ -70,13 +70,14 @@ class View
     {
         // semantic
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $path = str_replace(BASE_PATH, '', $path);
         if ($path != '/') {
             $path = rtrim($path, '/');
             if (stristr($path, 'page/')) {
                 $path = rtrim($path, '0..9');
                 $query = '';
             } else {
-                $query = $path . '/page/';
+                $query = '/page/';
             }
         } else {
             $query = 'page/';
