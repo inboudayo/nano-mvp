@@ -51,20 +51,18 @@ class Router
         }
 
         // we should always have a valid controller and method at this point, even if the defaults
-        // make sure we have the appropriate number of parameters, if arguments exist
+        // make sure we have the appropriate number of parameters
         if (method_exists($this->controller, $this->method)) {
             $ref_class = new \ReflectionClass($this->controller);
             $ref_method = $ref_class->getMethod($this->method);
-            if ($ref_method->getNumberOfParameters() > 0) {
-                $args = array_filter(explode('/', $params));
-                $total_args = count($args);
-                if ($total_args >= $ref_method->getNumberOfRequiredParameters() &&
-                    $total_args <= $ref_method->getNumberOfParameters()) {
-                    $this->params = $args;
-                } else {
-                    // invalid request
-                    self::notFound();
-                }
+            $args = array_filter(explode('/', $params));
+            $total_args = count($args);
+            if ($total_args >= $ref_method->getNumberOfRequiredParameters() &&
+                $total_args <= $ref_method->getNumberOfParameters()) {
+                $this->params = $args;
+            } else {
+                // invalid request
+                self::notFound();
             }
         } else {
             // invalid request

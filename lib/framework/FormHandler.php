@@ -112,7 +112,8 @@ class FormHandler
     }
 
     // output status message and clean session
-    public function status() {
+    public function status()
+    {
         if (list($controller, $method) = self::origin(4)) {
             if (isset($_SESSION[$controller][$method]['success'])) {
                 // on success
@@ -149,7 +150,8 @@ class FormHandler
     // $type: alpha, alnum, numeric, email, url, ip
     // $len: optional maximum length
     // $chars: optional string of any non alpha-numeric characters to allow
-    public function validate($str, $type = null, $len = null, $chars = null) {
+    public function validate($str, $type = null, $len = null, $chars = null)
+    {
         if (!isset($str) || trim($str) == '') {
             return false;
         }
