@@ -74,7 +74,8 @@ class FormHandler
                 $_SESSION[$controller][$method]['preserved'] = $_POST;
 
                 // reset the CSRF token
-                $_SESSION[$controller][$method]['csrf'] = self::getToken();
+                // may cause problems if users attempt to submit the same form across multiple browser tabs
+                //$_SESSION[$controller][$method]['csrf'] = self::getToken();
 
                 // check for token match
                 if ($token == $this->token) {
